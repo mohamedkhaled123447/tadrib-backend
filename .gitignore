@@ -1,0 +1,17 @@
+.vscode/
+gitlab_credentials/
+.git-credentials
+*.jpg
+*.png
+*.history
+.env
+.postgres
+*.pyc
+db.sqlite3
+media
+*.chk
+scripts
+venv
+.coverage
+info_documents
+storage
