@@ -140,6 +140,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.27.252:3000",
     "http://localhost:3000",
+    "http://localhost:3002",
     "http://192.168.27.252:3001",
     "http://192.168.27.252:3002",
     "http://localhost:5173",

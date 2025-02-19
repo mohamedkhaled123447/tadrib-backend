@@ -2967,3 +2967,7 @@ def default_types():
             "boundEducationHours": 1,
         },
     ]
+
+
+def default_jobs():
+    return []

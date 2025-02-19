@@ -5,9 +5,13 @@ from .serializers import (
     IntervalSerializer,
     IntervalListSerializer,
     SubjectSerializer,
+    JobSerializer,
+    TopicSerializer,
 )
-from .models import DayClass, Interval, Subject
+from .models import DayClass, Interval, Subject, Job, Topic
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from .print import generate_545_doc
 
 # Create your views here.
 
@@ -29,3 +33,29 @@ class IntervalViewSet(ModelViewSet):
 class SubjectViewSet(ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+
+
+class TopicViewSet(ModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSerializer
+
+
+class JobViewSet(ModelViewSet):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class Doc545(APIView):
+    def post(self, request, *args, **kwargs):
+        generate_545_doc(
+            request.data["data"],
+            request.data["subjects"],
+            request.data["len"],
+            request.data["week"],
+            request.data["month"],
+            request.data["totalTrainingHours"],
+            request.data["totalBoundEducationHours"],
+            request.data["start"],
+            request.data["end"],
+        )
+        return Response("ok")

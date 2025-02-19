@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import DayClass, Interval, Subject
+from .models import DayClass, Interval, Subject, Job, Topic
 
 
 class DayCalssSerializer(ModelSerializer):
@@ -20,7 +20,19 @@ class IntervalListSerializer(ModelSerializer):
         fields = ["id", "name"]
 
 
+class TopicSerializer(ModelSerializer):
+    class Meta:
+        model = Topic
+        fields = "__all__"
+
+
 class SubjectSerializer(ModelSerializer):
     class Meta:
         model = Subject
+        fields = "__all__"
+
+
+class JobSerializer(ModelSerializer):
+    class Meta:
+        model = Job
         fields = "__all__"

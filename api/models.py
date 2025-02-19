@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import default_interval, default_months_data,default_types
+from .utils import default_interval, default_months_data, default_types, default_jobs
 
 
 class DayClass(models.Model):
@@ -34,3 +34,29 @@ class Subject(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Job(models.Model):
+    name = models.CharField(max_length=150)
+    subjects = models.JSONField(default=default_jobs)
+
+
+class Topic(models.Model):
+    name = models.CharField(max_length=150)
+    place = models.CharField(max_length=250, default="لايكن")
+    training_tools = models.CharField(max_length=250, default="لايكن")
+    instructor = models.CharField(max_length=250, default="لايكن")
+    day = models.BooleanField(default=True)
+    night = models.BooleanField(default=False)
+    level = models.IntegerField(default=0)
+    topic_class = models.CharField(max_length=150, default="فرد")
+    job = models.ForeignKey(
+        Job, related_name="job_topics", on_delete=models.SET_NULL, null=True, blank=True
+    )
+    subject = models.ForeignKey(
+        Subject,
+        on_delete=models.CASCADE,
+        related_name="subject_topics",
+        null=True,
+        blank=True,
+    )
